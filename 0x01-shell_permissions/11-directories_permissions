@@ -1,0 +1,4 @@
+#!/bin/bash
+sudo chmod -R u+x */
+sudo chmod -R g+x */
+sudo chmod -R o+x */
