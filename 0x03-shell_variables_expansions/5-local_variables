@@ -1,2 +1,2 @@
 #!/bin/bash
-env | grep "^[a-zA-Z_]\+=";printenv;declare -f
+set -o posix; set | grep -E "^(declare -[a-zA-Z0-9]+|export [a-zA-Z0-9_]+|[a-zA-Z0-9_]+\(\))"
