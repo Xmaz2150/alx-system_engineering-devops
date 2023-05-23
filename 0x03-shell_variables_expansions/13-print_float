@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "${NUM:0:6}"
+printf "%.2f\n" "NUM"
