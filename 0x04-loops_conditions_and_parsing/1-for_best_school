@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#prints line * 10
+LINE="Best School"
+
+for _ in {1..10}; do
+	echo "$LINE"
+done
