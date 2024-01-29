@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 #displays "To infinity and beyond" indefinitely.
 #+ add a sleep 2 between each iteration of the loop
 while true
