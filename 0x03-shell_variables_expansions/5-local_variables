@@ -1,2 +1,2 @@
 #!/bin/bash
-set -o posix; set | grep -E "^(declare -[a-zA-Z0-9]+|export [a-zA-Z0-9_]+|[a-zA-Z0-9_]+\(\))"
+set
