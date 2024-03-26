@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# custom 404
+sudo apt-get update
+
+# Install nginx
+sudo apt-get install -y nginx
+
+# Create a custom 404 page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
+
+# Remove the default nginx configuration
+sudo rm /etc/nginx/sites-enabled/default
+
+# Create a new nginx configuration
+echo "server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /var/www/html;
+    index index.html;
+    server_name _;
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+    error_page 404 /custom_404.html;
+}" | sudo tee /etc/nginx/sites-available/default
+
+# Enable the new configuration
+sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
+
+# Restart nginx
+sudo service nginx restart
+
