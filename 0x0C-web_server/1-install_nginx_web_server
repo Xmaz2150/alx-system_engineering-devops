@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Update the package lists for upgrades and new package installations
+
+sudo apt-get update -y
+
+# Install nginx
+sudo apt-get install -y nginx
+
+# Remove the default nginx configuration
+sudo rm /etc/nginx/sites-enabled/default
+
+# Create a new nginx configuration
+echo "server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    root /var/www/html;
+    index index.html;
+    server_name _;
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+}" | sudo tee /etc/nginx/sites-available/default
+
+# Enable the new configuration
+sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
+
+# Create a new index.html file
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Restart nginx
+sudo service nginx restart
+
