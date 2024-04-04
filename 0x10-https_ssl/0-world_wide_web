@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# displays information about subdomains.
+# arguments $1: domain name, $2: subdomain name(optional)
+
+display_info ()
+{
+    domain="$1"
+    subdomain="$2"
+    
+    dig_output=$(dig "$subdomain.$domain")
+    echo echo "$dig_output" | awk -v var="$subdomain" '/ANSWER SECTION:/{getline; printf "The subdomain %s is a %s record and points to %s\n", var, $4, $5}'
+}
+
+subdomains=("www" "lb-01" "web-01" "web-02")
+for subdomain in "${subdomains[@]}"
+do
+
+    if [ -z "$2" ] || [ "$2" == "$subdomain" ] ;
+    then
+        display_info "$1" "$subdomain"
+    fi
+done
