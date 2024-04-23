@@ -8,21 +8,17 @@ import requests
 import sys
 
 if __name__ == '__main__':
-    user_id = sys.argv[1]
+    userId = sys.argv[1]
+    urlList = 'https://jsonplaceholder.typicode.com/todos?userId={}'
+    urlUsers = 'https://jsonplaceholder.typicode.com/users/{}'
 
-    todo_list = requests.get(
-            'https://jsonplaceholder.typicode.com/todos?userId={}'.
-            format(user_id)
-            ).json()
-    user = requests.get(
-            'https://jsonplaceholder.typicode.com/users/{}'.
-            format(user_id)
-            ).json()
+    todoList = requests.get(urlList.format(userId)).json()
+    user = requests.get(urlUsers.format(userId)).json()
 
-    done_tasks = [i.get('title') for i in todo_list if i.get('completed')]
-    user_name = user.get('name')
+    doneTasks = [i.get('title') for i in todoList if i.get('completed')]
+    userName = user.get('name')
 
-    print_str = 'Employee {} is done with tasks({}/{}):'
-    print(print_str.format(user_name, len(done_tasks), len(todo_list)))
-    for task in done_tasks:
+    printStr = 'Employee {} is done with tasks({}/{}):'
+    print(printStr.format(userName, len(doneTasks), len(todoList)))
+    for task in doneTasks:
         print('\t{}'.format(task))

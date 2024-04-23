@@ -9,20 +9,20 @@ import requests
 import sys
 
 if __name__ == '__main__':
-    url_list = 'https://jsonplaceholder.typicode.com/todos?userId={}'
-    url_users = 'https://jsonplaceholder.typicode.com/users/{}'
+    urlList = 'https://jsonplaceholder.typicode.com/todos?userId={}'
+    urlUsers = 'https://jsonplaceholder.typicode.com/users/{}'
 
-    user_id = sys.argv[1]
-    todo_list = requests.get(url_list.format(user_id)).json()
-    user = requests.get(url_users.format(user_id)).json()
+    userId = sys.argv[1]
+    todoList = requests.get(urlList.format(userId)).json()
+    user = requests.get(urlUsers.format(userId)).json()
 
-    user_name = user.get('username')
+    userName = user.get('username')
 
-    with open('{}.csv'.format(user_id), 'w') as csv_file:
-        writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
-        for item in todo_list:
+    with open('{}.csv'.format(userId), 'w') as csvfile:
+        writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
+        for item in todoList:
             writer.writerow([
-                user_id, user_name,
+                userId, userName,
                 item.get('completed'),
                 item.get('title')
                 ])
