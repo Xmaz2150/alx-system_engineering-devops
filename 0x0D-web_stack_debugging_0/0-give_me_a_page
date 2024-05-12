@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# starts and creates default page for apeche
+
+/etc/init.d/apache2 start
+sudo docker exec vigilant_tesla sh -c "echo 'Hello Holberton' > /usr/local/apache2/htdocs/index.html"
